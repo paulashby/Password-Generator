@@ -88,9 +88,19 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+var pwLength = 0;
+var MIN_PW_LENGTH = 10;
+var MAX_PW_LENGTH = 64;
+
 // Function to prompt user for password options
 function getPasswordOptions() {
+  
+  pwLength = prompt("How long would you like your password to be? Must be between " + MIN_PW_LENGTH + " and " + MAX_PW_LENGTH + " characters.");
 
+  if (pwLength < MIN_PW_LENGTH || pwLength > MAX_PW_LENGTH) {
+    alert ("Password must be between " + MIN_PW_LENGTH + " and " + MAX_PW_LENGTH);
+    getPasswordOptions();
+  } 
 }
 
 // Function for getting a random element from an array
@@ -116,3 +126,5 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
+
+getPasswordOptions();
