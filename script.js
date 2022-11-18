@@ -88,9 +88,10 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-var pwLength = 0;
+
 var MIN_PW_LENGTH = 10;
 var MAX_PW_LENGTH = 64;
+var pwLength = 0;
 
 // Function to prompt user for password options
 function getPasswordOptions() {
