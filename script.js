@@ -110,7 +110,7 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-
+  getPasswordOptions();
 }
 
 // Get references to the #generate element
@@ -126,5 +126,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
-
-getPasswordOptions();
