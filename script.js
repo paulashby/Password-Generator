@@ -88,12 +88,13 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-// var characterTypesMap = {
-//   lc: lowerCasedCharacters,
-//   uc: upperCasedCharacters,
-//   numeric: numericCharacters,
-//   special: specialCharacters
-// }
+// Use composition to make object we can traverse to determine user preferences
+var characterTypeChoices = {
+  lowercase: lowerCasedCharacters,
+  uppercase: upperCasedCharacters,
+  numeric: numericCharacters,
+  special: specialCharacters
+}
 
 var MIN_PW_LENGTH = 10;
 var MAX_PW_LENGTH = 64;
@@ -117,20 +118,11 @@ function getPasswordOptions() {
   // Keep prompting for characterTypes if none have been chosen
   while (options.characterTypes.length < 1) {
 
-    if (prompt("Include lowercase characters?") !== null) {
-      options.characterTypes.push(lowerCasedCharacters);
-    }
-  
-    if (prompt("Include uppercase characters?") !== null) {
-      options.characterTypes.push(upperCasedCharacters);
-    }
-  
-    if (prompt("Include numeric characters?") !== null) {
-      options.characterTypes.push(numericCharacters);
-    }
-  
-    if (prompt("Include special characters?") !== null) {
-      options.characterTypes.push(specialCharacters);
+    // Iterate through choices and prompt user to determine whether each should be included 
+    for (var charType in characterTypeChoices) {
+        if (prompt("Include " + charType + " characters?") !== null) {
+        options.characterTypes.push(characterTypeChoices[charType]);
+      }
     }
   }
   return options;
