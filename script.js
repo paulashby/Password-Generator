@@ -99,6 +99,7 @@ var MIN_PW_LENGTH = 10;
 var MAX_PW_LENGTH = 64;
 var pwLength = 0;
 var characterTypes = [];
+var password = "";
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -128,9 +129,14 @@ function getPasswordOptions() {
     if (prompt("Include special characters?") !== null) {
       characterTypes.push(specialCharacters);
     }
-
   }
+  
+  for (var i = 0; i < pwLength; i++) {
 
+    var charSet = getRandom(characterTypes);
+    password = password.concat(getRandom(charSet));
+  }
+  alert("Your password is " + password);
 }
 
 // Function for getting a random element from an array
