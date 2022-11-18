@@ -97,46 +97,43 @@ var upperCasedCharacters = [
 
 var MIN_PW_LENGTH = 10;
 var MAX_PW_LENGTH = 64;
-var pwLength = 0;
-var characterTypes = [];
 var password = "";
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  
-  pwLength = prompt("How long would you like your password to be? Must be between " + MIN_PW_LENGTH + " and " + MAX_PW_LENGTH + " characters.");
 
-  if (pwLength < MIN_PW_LENGTH || pwLength > MAX_PW_LENGTH) {
+  var options = {
+    pwLength: 0,
+    characterTypes: []
+  }
+  
+  options.pwLength = prompt("How long would you like your password to be? Must be between " + MIN_PW_LENGTH + " and " + MAX_PW_LENGTH + " characters.");
+
+  if (options.pwLength < MIN_PW_LENGTH || options.pwLength > MAX_PW_LENGTH) {
     alert ("Password must be between " + MIN_PW_LENGTH + " and " + MAX_PW_LENGTH);
     getPasswordOptions();
   } 
 
   // Keep prompting for characterTypes if none have been chosen
-  while (characterTypes.length < 1) {
+  while (options.characterTypes.length < 1) {
 
     if (prompt("Include lowercase characters?") !== null) {
-      characterTypes.push(lowerCasedCharacters);
+      options.characterTypes.push(lowerCasedCharacters);
     }
   
     if (prompt("Include uppercase characters?") !== null) {
-      characterTypes.push(upperCasedCharacters);
+      options.characterTypes.push(upperCasedCharacters);
     }
   
     if (prompt("Include numeric characters?") !== null) {
-      characterTypes.push(numericCharacters);
+      options.characterTypes.push(numericCharacters);
     }
   
     if (prompt("Include special characters?") !== null) {
-      characterTypes.push(specialCharacters);
+      options.characterTypes.push(specialCharacters);
     }
   }
-  
-  for (var i = 0; i < pwLength; i++) {
-
-    var charSet = getRandom(characterTypes);
-    password = password.concat(getRandom(charSet));
-  }
-  alert("Your password is " + password);
+  return options;
 }
 
 // Function for getting a random element from an array
@@ -146,7 +143,16 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-  getPasswordOptions();
+
+  // Get user's preferences  - length and character types
+  var options = getPasswordOptions();
+  
+  for (var i = 0; i < options.pwLength; i++) {
+
+    var charSet = getRandom(options.characterTypes);
+    password = password.concat(getRandom(charSet));
+  }
+ return password;
 }
 
 // Get references to the #generate element
