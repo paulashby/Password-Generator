@@ -88,10 +88,17 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+// var characterTypesMap = {
+//   lc: lowerCasedCharacters,
+//   uc: upperCasedCharacters,
+//   numeric: numericCharacters,
+//   special: specialCharacters
+// }
 
 var MIN_PW_LENGTH = 10;
 var MAX_PW_LENGTH = 64;
 var pwLength = 0;
+var characterTypes = [];
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -102,11 +109,33 @@ function getPasswordOptions() {
     alert ("Password must be between " + MIN_PW_LENGTH + " and " + MAX_PW_LENGTH);
     getPasswordOptions();
   } 
+
+  // Keep prompting for characterTypes if none have been chosen
+  while (characterTypes.length < 1) {
+
+    if (prompt("Include lowercase characters?") !== null) {
+      characterTypes.push(lowerCasedCharacters);
+    }
+  
+    if (prompt("Include uppercase characters?") !== null) {
+      characterTypes.push(upperCasedCharacters);
+    }
+  
+    if (prompt("Include numeric characters?") !== null) {
+      characterTypes.push(numericCharacters);
+    }
+  
+    if (prompt("Include special characters?") !== null) {
+      characterTypes.push(specialCharacters);
+    }
+
+  }
+
 }
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 // Function to generate password with user input
