@@ -98,7 +98,6 @@ var characterTypeChoices = {
 
 var MIN_PW_LENGTH = 10;
 var MAX_PW_LENGTH = 64;
-var password = "";
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -124,6 +123,9 @@ function getPasswordOptions() {
         options.characterTypes.push(characterTypeChoices[charType]);
       }
     }
+    if (options.characterTypes.length === 0) {
+      alert("You must include at least one set of characters - please OK an option.")
+    }
   }
   return options;
 }
@@ -138,13 +140,14 @@ function generatePassword() {
 
   // Get user's preferences  - length and character types
   var options = getPasswordOptions();
-  
+  var password = "";
+    
   for (var i = 0; i < options.pwLength; i++) {
 
     var charSet = getRandom(options.characterTypes);
     password = password.concat(getRandom(charSet));
   }
- return password;
+  return password;
 }
 
 // Get references to the #generate element
