@@ -132,16 +132,18 @@ function getPasswordOptions() {
             return null;
 
           case "y":
+            // This charType has been accepted - add to available charTypes
             options.characterTypes.push(characterTypeChoices[charType]);
             break;
 
           default:
+            // This charType has been rejected
             break;
         }
       }
     }
     if (options.characterTypes.length === 0) {
-      alert("You must include at least one set of characters - please OK an option.");
+      alert("You've rejected all the available character types - please try again and accept at least one of the " + Object.keys(characterTypeChoices).length + " options.");
     }
   }
   return options;
@@ -183,7 +185,7 @@ function writePassword() {
   if (password) {
     // Get reference to the #password textarea
     var passwordText = document.querySelector('#password');
-    
+
     // Update the #password textarea to display the new password
     passwordText.value = password;
   }
